@@ -9,13 +9,11 @@ class LoginModel {
     required this.tokenType,
   });
 
-  factory LoginModel.fromJson(Map<String, dynamic> fromJson) {
+  factory LoginModel.fromJson(Map<String, dynamic> json) {
     return LoginModel(
-      token: fromJson['token'],
-      tokenType: fromJson['tokenType'],
-      data: /*fromJson['data'] != null ?*/
-          UserData.fromJson(fromJson['user'] /*?? null*/),
-      /*: null;*/
+      token: json['access_token'],
+      tokenType: json['token_type'],
+      data: UserData.fromJson(json['user']),
     );
   }
 }
