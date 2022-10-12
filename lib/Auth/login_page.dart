@@ -22,6 +22,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    emailController.text = "gm@gm.gm";
+    passwordController.text = "gm@gm.gm";
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginStates>(
@@ -74,6 +76,7 @@ class LoginPage extends StatelessWidget {
                             height: 35,
                           ),
                           CustomFormTextField(
+                            controller: emailController,
                             label: 'Email',
                             hintText: 'Enter your Email Address',
                             inputType: TextInputType.emailAddress,
@@ -82,6 +85,7 @@ class LoginPage extends StatelessWidget {
                             height: 25,
                           ),
                           CustomFormTextField(
+                            controller: passwordController,
                             label: 'Password',
                             hintText: 'Enter your Password',
                             isPassword: true,

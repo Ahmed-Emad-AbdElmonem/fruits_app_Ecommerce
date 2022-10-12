@@ -5,12 +5,13 @@ class CustomFormTextField extends StatefulWidget {
     required this.hintText,
     this.isPassword = false,
      this.label,
-    this.inputType,
+    this.inputType, this.controller,
   });
 
   String hintText;
   String? label;
   TextInputType? inputType;
+  final TextEditingController? controller;
 
   late bool isPassword;
 
@@ -35,7 +36,7 @@ class _CustomFormTextFieldState extends State<CustomFormTextField> {
             ),
           ),
           TextFormField(
-            
+            controller: widget.controller,
             style: TextStyle(color: Colors.black, fontSize: 17),
             keyboardType: widget.inputType,
             obscureText: isHidden && widget.isPassword,
