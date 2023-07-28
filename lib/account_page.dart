@@ -37,9 +37,18 @@ class AccountPage extends StatelessWidget {
   }
 }*/
 
+/////////
+///
+///
+///
+////
+/*
+import 'package:ecommerce_fruits_app/Auth/Cubit/shop_cubit.dart';
+import 'package:ecommerce_fruits_app/Auth/Cubit/shop_states.dart';
 import 'package:ecommerce_fruits_app/Auth/login_page.dart';
 import 'package:ecommerce_fruits_app/widgets/mainButton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -51,182 +60,190 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 50,
-              left: 10,
-              right: 10,
-            ),
-            child: Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'assets/images/a.jpg',
-                      height: 120,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'My Name',
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                      overflow: TextOverflow.ellipsis,
-                                      color: Color(0xff181725),
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
+    return BlocConsumer<ShopCubit,ShopStates>(
+      listener: (context, state) {} ,
+      builder: (context, state) {
+        var cubit= ShopCubit.get(context).userModel;
+        return 
+       Scaffold(
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 50,
+                left: 10,
+                right: 10,
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        'assets/images/a.jpg',
+                        height: 120,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      cubit!.data!.name ,
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        color: Color(0xff181725),
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.edit,
-                                      color: Color(0xff53B175),
-                                    )),
-                              ],
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(right: 10),
-                              child: Text(
-                                'myEmail@gmail.com',
-                                maxLines: 2,
-                                style: TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  color: Color(0xff7C7C7C),
-                                  fontSize: 16,
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.edit,
+                                        color: Color(0xff53B175),
+                                      )),
+                                ],
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 10),
+                                child: Text(
+                                  cubit.data!.email ,
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    color: Color(0xff7C7C7C),
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 50,
-                            ),
-                          ],
+                              SizedBox(
+                                height: 50,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Divider(
-                  color: Colors.amber,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                GestureDetector(
-                  onTap: (() {}),
-                  child: Container(
-                    child: AcountDetails(
-                        icon1: Icon(Icons.badge_sharp),
-                        icon2: Icon(Icons.arrow_forward_ios),
-                        txt: 'Orders'),
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Divider(
-                  color: Colors.red,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                AcountDetails(
-                    icon1: Icon(Icons.details),
-                    icon2: Icon(Icons.arrow_forward_ios),
-                    txt: 'My Details'),
-                Divider(
-                  color: Colors.red,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                AcountDetails(
-                    icon1: Icon(Icons.location_pin),
-                    icon2: Icon(Icons.arrow_forward_ios),
-                    txt: 'Delivery Address'),
-                Divider(
-                  color: Colors.red,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                AcountDetails(
-                    icon1: Icon(Icons.payment),
-                    icon2: Icon(Icons.arrow_forward_ios),
-                    txt: 'Payment Methods'),
-                Divider(
-                  color: Colors.red,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                AcountDetails(
-                    icon1: Icon(Icons.card_giftcard),
-                    icon2: Icon(Icons.arrow_forward_ios),
-                    txt: 'Promo Cord'),
-                Divider(
-                  color: Colors.red,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                AcountDetails(
-                    icon1: Icon(Icons.notifications),
-                    icon2: Icon(Icons.arrow_forward_ios),
-                    txt: 'Notifecations'),
-                Divider(
-                  color: Colors.red,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                AcountDetails(
-                    icon1: Icon(Icons.help),
-                    icon2: Icon(Icons.arrow_forward_ios),
-                    txt: 'Help'),
-                Divider(
-                  color: Colors.red,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                AcountDetails(
-                    icon1: Icon(Icons.question_mark),
-                    icon2: Icon(Icons.arrow_forward_ios),
-                    txt: 'About'),
-                Divider(
-                  color: Color.fromARGB(255, 11, 163, 21),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                MainButton(txt: 'Log Out', ontap: (){}),
-              ],
+                  Divider(
+                    color: Colors.amber,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  GestureDetector(
+                    onTap: (() {}),
+                    child: Container(
+                      child: AcountDetails(
+                          icon1: Icon(Icons.badge_sharp),
+                          icon2: Icon(Icons.arrow_forward_ios),
+                          txt: 'Orders'),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Divider(
+                    color: Colors.red,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  AcountDetails(
+                      icon1: Icon(Icons.details),
+                      icon2: Icon(Icons.arrow_forward_ios),
+                      txt: 'My Details'),
+                  Divider(
+                    color: Colors.red,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  AcountDetails(
+                      icon1: Icon(Icons.location_pin),
+                      icon2: Icon(Icons.arrow_forward_ios),
+                      txt: 'Delivery Address'),
+                  Divider(
+                    color: Colors.red,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  AcountDetails(
+                      icon1: Icon(Icons.payment),
+                      icon2: Icon(Icons.arrow_forward_ios),
+                      txt: 'Payment Methods'),
+                  Divider(
+                    color: Colors.red,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  AcountDetails(
+                      icon1: Icon(Icons.card_giftcard),
+                      icon2: Icon(Icons.arrow_forward_ios),
+                      txt: 'Promo Cord'),
+                  Divider(
+                    color: Colors.red,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  AcountDetails(
+                      icon1: Icon(Icons.notifications),
+                      icon2: Icon(Icons.arrow_forward_ios),
+                      txt: 'Notifecations'),
+                  Divider(
+                    color: Colors.red,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  AcountDetails(
+                      icon1: Icon(Icons.help),
+                      icon2: Icon(Icons.arrow_forward_ios),
+                      txt: 'Help'),
+                  Divider(
+                    color: Colors.red,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  AcountDetails(
+                      icon1: Icon(Icons.question_mark),
+                      icon2: Icon(Icons.arrow_forward_ios),
+                      txt: 'About'),
+                  Divider(
+                    color: Color.fromARGB(255, 11, 163, 21),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  MainButton(txt: 'Log Out', ontap: (){}),
+                ],
+              ),
             ),
           ),
         ),
-      ),
+    
+    
+    
+        
+      );
+      } ,
 
-
-
-      
     );
 
 
@@ -269,7 +286,7 @@ class _AccountPageState extends State<AccountPage> {
 
 }
 
-
+*/
  
 
 

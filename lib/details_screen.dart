@@ -1,14 +1,14 @@
-
-
-
-import 'package:ecommerce_fruits_app/h.dart';
-
+import 'package:ecommerce_fruits_app/models/all_products_model.dart';
+import 'package:ecommerce_fruits_app/models/all_products_model.dart';
+import 'package:ecommerce_fruits_app/models/all_products_model.dart';
 import 'package:ecommerce_fruits_app/widgets/mainButton.dart';
 import 'package:flutter/material.dart';
-
+/*
 class DetailsScreen extends StatefulWidget {
-   DetailsScreen({Key? key, this.productCard}) : super(key: key);
-  final ProductCard? productCard;
+   DetailsScreen({Key? key,required this.productModell}) : super(key: key);
+   // AllProductsModel? allProductsModel;
+    Data? productModell;
+    
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -53,7 +53,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Image.asset(
-                    '${widget.productCard!.img}',
+                    '${widget.Data.image}',
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -70,7 +70,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${widget.productCard!.title}',
+                          '${widget.productModell!.price}',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -84,7 +84,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      '${widget.productCard!.quantity}',
+                      '${widget.productModell!.price /*quantity*/}',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -152,6 +152,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       ),
     );
   }
+  
 
  Widget  counter() {
    // int count = 0;
@@ -215,7 +216,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            '\$ ${widget.productCard!.price}',
+            '\$ ${widget.productModell!.price}',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -227,4 +228,4 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-}
+}*/

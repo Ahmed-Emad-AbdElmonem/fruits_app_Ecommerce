@@ -1,31 +1,61 @@
-import 'package:ecommerce_fruits_app/Auth/Cubit/login/cubit.dart';
-import 'package:ecommerce_fruits_app/Auth/Cubit/login/states.dart';
+import 'package:ecommerce_fruits_app/Auth/Cubit/login/login_cubit.dart';
+
+import 'package:ecommerce_fruits_app/Auth/Cubit/shop_states.dart';
 import 'package:ecommerce_fruits_app/Auth/resgister_page.dart';
+import 'package:ecommerce_fruits_app/cashhelper.dart';
+import 'package:ecommerce_fruits_app/constants.dart';
+import 'package:ecommerce_fruits_app/h.dart';
 import 'package:ecommerce_fruits_app/widgets/Navigator_widget.dart';
 import 'package:ecommerce_fruits_app/widgets/custom_text_field.dart';
 import 'package:ecommerce_fruits_app/widgets/mainButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
-  static String id = 'login page';
+ // static String id = 'login page';
 
   bool isLoading = false;
 
   GlobalKey<FormState> formKey = GlobalKey();
 
-  String? email, password;
+ // String? email, password;
+  TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+    
     return BlocProvider(
       create: (context) => LoginCubit(),
-      child: BlocConsumer<LoginCubit, LoginStates>(
+      child: BlocConsumer<LoginCubit, ShopStates>(
         listener: (context, state) {
+          if (state is SuccessLoginState) {
+            
+            if(state.loginModel!.status == true /*state.loginModel!.status*/){
+             CacheHelper.saveData(key: "token", value: state.loginModel!.data!.token).then((value){
+              token = state.loginModel!.data!.token!;
+                navigateTo(context, ShopScreen());
+              });
+            }else{
+              showModalBottomSheet(context: context, builder: (context){
+             return Container(
+              height: 22,
+              child: Text(
+               
+                '${'  '}${state.loginModel!.message}',
+                style: TextStyle(fontWeight:FontWeight.bold,color:Colors.redAccent  ),
+                )
+                );
+              }
+              );
+                 
+            }
+          /*  token=state.loginModel!.data!.token;
+            print(token);*/
+            
+          }
           
         },
         builder: (context, state) {
@@ -74,18 +104,22 @@ class LoginPage extends StatelessWidget {
                             height: 35,
                           ),
                           CustomFormTextField(
+                            controller:emailController ,
                             label: 'Email',
                             hintText: 'Enter your Email Address',
                             inputType: TextInputType.emailAddress,
+                            
                           ),
                           SizedBox(
                             height: 25,
                           ),
                           CustomFormTextField(
+                            controller:passwordController ,
                             label: 'Password',
                             hintText: 'Enter your Password',
                             isPassword: true,
                             inputType: TextInputType.visiblePassword,
+                            
                           ),
                           Align(
                             child: Text(
@@ -100,7 +134,7 @@ class LoginPage extends StatelessWidget {
                           SizedBox(
                             height: 30,
                           ),
-                          state is LoadingState
+                          state is LoadingLoginState
                               ? Center(child: CircularProgressIndicator())
                               : Center(
                                   child: MainButton(
@@ -112,6 +146,7 @@ class LoginPage extends StatelessWidget {
                                               email: emailController.text,
                                               password:
                                                   passwordController.text);
+                                                  
                                         }
                                       }),
                                 ),
@@ -149,7 +184,7 @@ class LoginPage extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  NavigateTo(context, SignUp());
+                                  navigateTo(context, SignUp());
                                 },
                                 child: Text(
                                   'signUp',

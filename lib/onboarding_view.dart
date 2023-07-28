@@ -51,7 +51,8 @@ class OnboardingScreen extends StatelessWidget {
               MainButton(
                 txt: 'Get Started',
                 ontap: () {
-                  NavigateTo(context, LoginPage());
+                  
+                  navigateTo(context, LoginPage());
                 },
               ),
               SizedBox(
